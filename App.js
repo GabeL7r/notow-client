@@ -1,23 +1,35 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { Component } from 'react';
+import { Container, Header, Content, Button, Text } from 'native-base';
+import { StackNavigator } from 'react-navigation';
+import styled from 'styled-components';
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
-    );
-  }
-}
+// Screen Imports:
+import SplashScreen from './components/splash/SplashScreen';
+import CameraScreen from './components/camera/CameraScreen';
+import ProcessingScreen from './components/processing/ProcessingScreen';
+import NoTowScreen from './components/notow/NoTowScreen';
+import TowScreen from './components/tow/TowScreen';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+const RootStack = StackNavigator({
+  Splash: {
+    screen: SplashScreen,
+  },
+  Camera: {
+    screen: CameraScreen
+  },
+  Processing: {
+    screen: ProcessingScreen
+  },
+  NoTow: {
+    screen: NoTowScreen
+  },
+  Tow: {
+    screen: TowScreen
   },
 });
+
+export default class App extends Component {
+  render() {
+    return <RootStack />;
+  }
+}
