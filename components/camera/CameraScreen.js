@@ -8,22 +8,11 @@ import styled from 'styled-components';
 import isIPhoneX from 'react-native-is-iphonex';
 import moment from 'moment';
 
-const landmarkSize = 2;
-
 const flashModeOrder = {
   off: 'on',
   on: 'auto',
   auto: 'torch',
   torch: 'off',
-};
-
-const wbOrder = {
-  auto: 'sunny',
-  sunny: 'cloudy',
-  cloudy: 'shadow',
-  shadow: 'fluorescent',
-  fluorescent: 'incandescent',
-  incandescent: 'auto',
 };
 
 export default class CameraScreen extends React.Component {
@@ -101,13 +90,20 @@ export default class CameraScreen extends React.Component {
 
   async takePicture() {
     if (this.camera) {
+      Vibration.vibrate();
+
       // formatted time string of when the photo was taken
       const takenAt = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
       const imageData = await this.camera.takePictureAsync({ base64: true });
 
       const pictureData = {
-        imageData: imageData.base64,
-        time: takenAt
+        image: imageData.base64,
+        time: takenAt,
+        // todo:
+        location: {
+          lat: null,
+          long: null
+        }
       };
 
       // head to the ProcessingScreen with the data:
@@ -127,14 +123,9 @@ export default class CameraScreen extends React.Component {
 
   renderCamera() {
     return (
-      <View style={{ flex: 1 }}>
+      <FlexView>
         <Camera
-          style={{
-            flex: 1,
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-          }}
+          style={{ flex: 1, alignItems: 'center' }}
           ref={ref => {
             this.camera = ref;
           }}
@@ -146,19 +137,17 @@ export default class CameraScreen extends React.Component {
           ratio={this.state.ratio}
           focusDepth={this.state.depth}
         >
-          <ButtonWrapper>
-            <TouchableOpacity
-              style={{
-                shadowColor: 'transparent',
-                shadowOpacity: 0
-              }}
-              onPress={() => this.takePicture()}
-            >
-              <Ionicons name="ios-radio-button-on" size={75} color="#FFF" />
-            </TouchableOpacity>
+          <TopHelpTextWrapper>
+            <TopHelpText>Align the parking sign in the target box.</TopHelpText>
+          </TopHelpTextWrapper>
+          <TargetOutline />
+          <ButtonWrapper
+            onPress={() => this.takePicture()}
+          >
+            <Ionicons name="ios-radio-button-on" size={80} color="#FFF" />
           </ButtonWrapper>
         </Camera>
-      </View>
+      </FlexView>
     );
   }
 
@@ -171,19 +160,50 @@ export default class CameraScreen extends React.Component {
   }
 }
 
-const ButtonWrapper = styled(View)`
+const FlexView = styled(View)`
   flex: 1;
-  flex-direction: row;
-  align-self: center;
+`;
+
+const TopHelpTextWrapper = styled(View)`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100;
+  background-color: rgba(0, 0, 0, .25);
+`;
+
+const TopHelpText = styled(Text)`
+  margin-top: 20px;
+  color: rgb(255, 255, 255);
+  font-size: 16
+`;
+
+const TargetOutline = styled(View)`
+  position: absolute;
+  top: 20%;
+  height: 50%;
+  width: 65%;
+  border: 2px dashed #fff;
+  border-style: dashed;
+`;
+
+const ButtonWrapper = styled(TouchableOpacity)`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 50;
+  width: 100%;
   border: 0;
+  background: rgba(0,0,0,0);
   box-shadow: none;
 `;
 
 const TakePictureButton = styled(Button)`
-  flex: .25;
-  height: 100%;
-  margin-top: 275px;
-  justify-content: center;
   background: rgba(0,0,0,0);
   border: 0;
   box-shadow: none;

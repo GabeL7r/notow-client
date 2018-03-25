@@ -7,6 +7,10 @@ import styles from "./SplashScreenStyles";
 const splashScreenLogo = require("../../assets/noTowCircleBig.png");
 
 class SplashScreen extends Component {
+  static navigationOptions = {
+    header: null
+  }
+
   async componentWillMount() {
     await Expo.Font.loadAsync({
       'Roboto': require('native-base/Fonts/Roboto.ttf'),
@@ -25,7 +29,7 @@ class SplashScreen extends Component {
       <Container style={styles.background}>
         <Content>
             <ImageBackground source={splashScreenLogo} style={styles.logo}/>
-            <Text style={styles.textName}>NOTOW</Text>
+            <Text style={styles.textName}>NoTow</Text>
             <Text style={styles.textTagLine}>Park safely, anywhere</Text>
         </Content>
       </Container>

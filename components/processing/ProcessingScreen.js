@@ -5,7 +5,7 @@ import axios from 'axios';
 
 import AppBackground from '../shared/AppBackground';
 
-const detectEndpoint = 'https://5eqxk53744.execute-api.us-west-2.amazonaws.com/api/detect';
+const detectEndpoint = 'https://5eqxk53744.execute-api.us-west-2.amazonaws.com/api/detect-java';
 
 class Processing extends Component {
   static navigationOptions = {
