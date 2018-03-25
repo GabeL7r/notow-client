@@ -19,19 +19,19 @@ export default {
   logo: {
     position: "absolute",
     left: (deviceWidth - logoDimension) / 2,
-    top: Platform.OS === "android" ? 5 : 30,
+    top: Platform.OS === "android" ? 20 : 30,
     width: logoDimension,
     height: logoDimension
   },
   textName: {
-    left: (deviceWidth - 90) / 2,
-    width: 200,
+    textAlign: 'center',
     marginTop: 400,
+    fontWeight: 'bold',
+    fontSize: 40,
     color: '#ffffff'
   },
   textTagLine: {
-    left: (deviceWidth - 200) / 2,
-    width: 200,
+    textAlign: 'center',
     marginTop: 5,
     color: '#ffffff'
   },
