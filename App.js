@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { StyleProvider, Container, Header, Content, Button, Text } from 'native-base';
 import { StackNavigator } from 'react-navigation';
 import styled from 'styled-components';
+if (__DEV__) {
+  require('react-devtools');
+}
 
 // Screen Imports:
 import SplashScreen from './components/splash/SplashScreen';

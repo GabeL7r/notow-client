@@ -5,11 +5,12 @@ import axios from 'axios';
 
 import AppBackground from '../shared/AppBackground';
 
-const detectEndpoint = 'https://5eqxk53744.execute-api.us-west-2.amazonaws.com/api/detect';
+const detectEndpoint = 'https://5eqxk53744.execute-api.us-west-2.amazonaws.com/api/detect-java';
 
 class Processing extends Component {
   state = {
-    error: false
+    error: false,
+    invalidPhoto: false
   }
 
   static navigationOptions = {
@@ -23,15 +24,8 @@ class Processing extends Component {
     let resp;
 
     try {
-      // temp: abort after 10 seconds
-      // todo: proper error handling
-      // setTimeout(() => {
-      //   this.setState({ error: true });
-      // }, 10 * 1000);
-
-      console.log(pictureData.image.length);
-      console.log('hey')
-
+      console.log('Image Char Length: ', pictureData.image.length);
+      console.log('Processing...');
 
       resp = await axios(detectEndpoint, {
         method: 'POST',
@@ -42,38 +36,27 @@ class Processing extends Component {
         data: { image: pictureData.image }
       });
 
-      // resp = await fetch(detectEndpoint, {
-      //   method: 'POST',
-      //   headers: {
-      //     Accept: 'application/json',
-      //     'Content-Type': 'application/json',
-      //     'Cache-Control': 'no-cache'
-      //   },
-      //   body: JSON.stringify({
-      //     image: pictureData.data
-      //   }),
-      // });
-
-      // resp = await resp.json();
-
       console.log(resp.data);
 
-      return;
+      const { data } = resp;
 
-      if (!resp.data) {
+      if (!data) {
         return false;
       }
 
-      if (resp.data.canPark === true) {
+      // Not hot dog === photo was not a parking sign:
+      if (data.details === 'Not hot dog') {
+        this.setState({ invalidPhoto: true });
+        return false;
+      }
+
+      if (data.canPark === true) {
         this.props.navigation.navigate('NoTow');
-      } else if (resp.data.canPark === false) {
+      } else if (data.canPark === false) {
         this.props.navigation.navigate('Tow');
-      } else if (resp.data.canPark === 'nothotdog') {
-        // todo
       } else {
         this.setState({ error: true });
       }
-
     } catch (e) {
       // todo notify user
       this.setState({ error: true });
@@ -90,9 +73,15 @@ class Processing extends Component {
     );
   }
 
+  renderInvalidSign() {
+    return (
+      <ProcessingText>This is not a valid parking sign. So yeah, you probably shouldn't park here.</ProcessingText>
+    );
+  }
+
   renderError() {
     return (
-      <Text>Something went wrong.  That's all we know for now.  I'm sorry.  :(</Text>
+      <ProcessingText>Something went wrong.  That's all we know for now.  I'm sorry.  :(</ProcessingText>
     )
   }
 
@@ -102,9 +91,11 @@ class Processing extends Component {
         <Content>
           <ProcessingH1Text>Tow or NoTow?</ProcessingH1Text>
           {
-            this.state.error
-              ? this.renderError()
-              : this.renderSpinner()
+            this.state.invalidPhoto
+              ? this.renderInvalidSign()
+              : this.state.error
+                ? this.renderError()
+                : this.renderSpinner()
           }
         </Content>
       </AppBackground>
