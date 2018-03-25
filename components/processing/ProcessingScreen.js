@@ -24,7 +24,7 @@ class Processing extends Component {
     let resp;
 
     try {
-      console.log('Image Char Length: ', pictureData.image.length);
+      console.log(`Image Char Length: ${pictureData.image.length}`);
       console.log('Processing...');
 
       resp = await axios(detectEndpoint, {
@@ -36,7 +36,7 @@ class Processing extends Component {
         data: { image: pictureData.image }
       });
 
-      console.log(resp.data);
+      console.log('Received data: ', resp.data);
 
       const { data } = resp;
 

@@ -185,6 +185,15 @@ const FlexView = styled(View)`
   flex: 1;
 `;
 
+const TargetOutline = styled(View)`
+  position: absolute;
+  top: 20%;
+  height: 50%;
+  width: 65%;
+  border: 2px dashed #fff;
+  border-style: dashed;
+`;
+
 const TopHelpTextWrapper = styled(View)`
   flex: 1;
   align-items: center;
@@ -201,15 +210,6 @@ const TopHelpText = styled(Text)`
   margin-top: 20px;
   color: rgb(255, 255, 255);
   font-size: 16
-`;
-
-const TargetOutline = styled(View)`
-  position: absolute;
-  top: 20%;
-  height: 50%;
-  width: 65%;
-  border: 2px dashed #fff;
-  border-style: dashed;
 `;
 
 const ButtonWrapper = styled(TouchableOpacity)`
