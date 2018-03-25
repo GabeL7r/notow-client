@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Header, Content, Button, Text } from 'native-base';
+import { StyleProvider, Container, Header, Content, Button, Text } from 'native-base';
 import { StackNavigator } from 'react-navigation';
 import styled from 'styled-components';
 if (__DEV__) {
@@ -32,7 +32,24 @@ const RootStack = StackNavigator({
 });
 
 export default class App extends Component {
+  state = {
+    ready: false
+  }
+
+  async componentWillMount() {
+    await Expo.Font.loadAsync({
+      'Roboto': require('native-base/Fonts/Roboto.ttf'),
+      'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
+    });
+
+    this.setState({ ready: true });
+  }
+
   render() {
+    if (!this.state.ready) {
+      return false;
+    }
+
     return <RootStack />;
   }
 }

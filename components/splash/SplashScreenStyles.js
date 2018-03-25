@@ -19,7 +19,7 @@ export default {
   logo: {
     position: "absolute",
     left: (deviceWidth - logoDimension) / 2,
-    top: Platform.OS === "android" ? 20 : 30,
+    top: Platform.OS === "android" ? 80 : 100,
     width: logoDimension,
     height: logoDimension
   },
@@ -27,12 +27,13 @@ export default {
     textAlign: 'center',
     marginTop: 400,
     fontWeight: 'bold',
-    fontSize: 40,
+    fontSize: 52,
     color: '#ffffff'
   },
   textTagLine: {
     textAlign: 'center',
     marginTop: 5,
-    color: '#ffffff'
+    color: '#ffffff',
+    fontSize: 24
   },
 };

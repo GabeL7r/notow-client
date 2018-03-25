@@ -20,7 +20,8 @@ class SplashScreen extends Component {
 
   constructor() {
     super();
-    setTimeout( () => this.props.navigation.navigate("Tow"), 2 * 1000)
+
+    setTimeout( () => this.props.navigation.navigate("Camera"), 4 * 1000);
   }
 
   render() {
@@ -32,7 +33,6 @@ class SplashScreen extends Component {
             <Text style={styles.textTagLine}>Park safely, anywhere</Text>
         </Content>
       </Container>
-
     );
   }
 }
