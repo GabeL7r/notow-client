@@ -24,14 +24,14 @@ class TowScreen extends Component {
             </CardItem>
             <CardItem style={{ backgroundColor: 'lightgrey', flex:1, flexDirection: 'column' }}>
               <ImageBackground
-                source={tickets} 
+                source={tickets}
                 style={{ width: '100%', height: 200 }}
               />
               <View style={{ flex: 1, width: '100%' }}>
                 <Button
                   rounded
                   success
-                  onPress={()=> this.props.navigation.navigate('Splash')}
+                  onPress={() => this.props.navigation.navigate('Dashboard')}
                   style={{ alignSelf: 'flex-end', marginTop: 10, marginLeft: 15, marginBottom: 10 }}>
                   <Text>Got it!</Text>
                 </Button>
