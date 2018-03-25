@@ -17,13 +17,13 @@ class SplashScreen extends Component {
     });
   }
 
-  constructor() {
-    super();
-
-    setTimeout( () => this.props.navigation.navigate("Camera"), 3 * 1000);
+  redirect() {
+    setTimeout(() => this.props.navigation.navigate('Dashboard'), 3 * 1000);
   }
 
   render() {
+    this.redirect();
+
     return (
       <Container style={styles.background}>
         <Content>
