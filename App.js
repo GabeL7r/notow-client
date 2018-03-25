@@ -12,6 +12,7 @@ import CameraScreen from './components/camera/CameraScreen';
 import ProcessingScreen from './components/processing/ProcessingScreen';
 import NoTowScreen from './components/notow/NoTowScreen';
 import TowScreen from './components/tow/TowScreen';
+import DashboardScreen from './components/dashboard/DashboardScreen';
 
 const RootStack = StackNavigator({
   Splash: {
@@ -29,6 +30,9 @@ const RootStack = StackNavigator({
   Tow: {
     screen: TowScreen
   },
+  Dashboard: {
+    screen: DashboardScreen
+  }
 });
 
 export default class App extends Component {
