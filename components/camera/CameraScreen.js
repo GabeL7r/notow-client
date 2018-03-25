@@ -1,7 +1,7 @@
 
 import React from 'react';
-import { Constants, Camera, FileSystem, Permissions } from 'expo';
-import { StyleSheet, Text, View, TouchableOpacity, Slider, Vibration } from 'react-native';
+import { Constants, Camera, Location, Permissions } from 'expo';
+import { Platform, Text, View, TouchableOpacity, Vibration } from 'react-native';
 import { Button } from 'native-base';
 import { Ionicons } from '@expo/vector-icons';
 import styled from 'styled-components';
@@ -49,8 +49,30 @@ export default class CameraScreen extends React.Component {
 
   async componentWillMount() {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
+
+    if (Platform.OS === 'android' && !Constants.isDevice) {
+      this.setState({
+        errorMessage: 'Oops, this will not work on Sketch in an Android emulator. Try it on your device!',
+      });
+    } else {
+      this.getLocationAsync();
+    }
+
     this.setState({ permissionsGranted: status === 'granted' });
   }
+
+  getLocationAsync = async () => {
+    let { status } = await Permissions.askAsync(Permissions.LOCATION);
+
+    if (status !== 'granted') {
+      this.setState({
+        errorMessage: 'Permission to access location was denied',
+      });
+    }
+
+    let location = await Location.getCurrentPositionAsync({});
+    this.setState({ location });
+  };
 
   getRatios = async () => {
     const ratios = await this.camera.getSupportedRatios();
@@ -103,11 +125,20 @@ export default class CameraScreen extends React.Component {
     if (this.camera) {
       // formatted time string of when the photo was taken
       const takenAt = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
-      const imageData = await this.camera.takePictureAsync({ base64: true });
+      const imageData = await this.camera.takePictureAsync({ base64: true, quality: 0 });
 
       const pictureData = {
+<<<<<<< Updated upstream
         imageData: imageData.base64,
         time: takenAt
+=======
+        image: imageData.base64,
+        // time: takenAt,
+        // location: {
+        //   lat: this.state.location.coords.latitude,
+        //   lng: this.state.location.coords.longitude
+        // }
+>>>>>>> Stashed changes
       };
 
       // head to the ProcessingScreen with the data:
