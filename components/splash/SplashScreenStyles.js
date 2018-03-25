@@ -27,10 +27,12 @@ export default {
     left: (deviceWidth - 90) / 2,
     width: 200,
     marginTop: 400,
+    color: '#ffffff'
   },
   textTagLine: {
     left: (deviceWidth - 200) / 2,
     width: 200,
-    marginTop: 5
+    marginTop: 5,
+    color: '#ffffff'
   },
 };

@@ -1,20 +1,33 @@
 import React, { Component } from 'react';
-import { Container, Header, Content, Button, Text } from 'native-base';
+import { Container, Content, Text, Spinner } from 'native-base';
 import styled from 'styled-components';
+
+import AppBackground from '../shared/AppBackground';
 
 class Processing extends Component {
   render() {
     return (
-      <Container>
-        <Header>
-          <Text>Processing</Text>
-        </Header>
+      <AppBackground>
         <Content>
-          <Text>You've made it to the Processing screen!</Text>
+          <ProcessingH1Text>Tow or NoTow?</ProcessingH1Text>
+            <Spinner color='#C2E7DA' style={{marginTop: 50}} />
+          <ProcessingText>Processing your image...</ProcessingText>
         </Content>
-      </Container>
+      </AppBackground>
     );
   }
 }
+
+const ProcessingText = styled(Text)`
+  padding-top: 100px;
+  font-weight: bold;
+  text-align: center;
+  color: #ffffff;
+`
+
+const ProcessingH1Text = styled(ProcessingText)`
+  font-size: 40px;
+  color: #feebeb;
+`
 
 export default Processing;
