@@ -1,20 +1,34 @@
 import React, { Component } from 'react';
-import { Container, Header, Content, Button, Text } from 'native-base';
+import { Container, Content, Button, Card, CardItem, Body, Text } from 'native-base';
 import styled from 'styled-components';
+import AppBackground from '../shared/AppBackground';
 
 class TowScreen extends Component {
   render() {
     return (
-      <Container>
-        <Header>
-          <Text>Tow</Text>
-        </Header>
+      <AppBackground>
         <Content>
-          <Text>You've made it to the Tow screen!</Text>
+          <TowCard>
+            <CardItem style={{flex:1, flexDirection: 'column'}}>
+              <Body>
+                <Text>Tow!</Text>
+                <Text>Don't park it here, you will probably get towed!</Text>
+              </Body>
+              <Body style={{backgroundColor: 'lightgrey'}}>
+                <Button rounded success>
+                  <Text>Got it!</Text>
+                </Button>
+              </Body>
+            </CardItem>
+          </TowCard>
         </Content>
-      </Container>
+      </AppBackground>
     );
   }
 }
+
+const TowCard = styled(Card)`
+  margin-top: 8px;
+`
 
 export default TowScreen;

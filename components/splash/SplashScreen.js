@@ -15,25 +15,21 @@ class SplashScreen extends Component {
   }
   constructor() {
     super();
-    setTimeout( () => this.props.navigation.navigate("Camera"), 4 * 1000)
+    setTimeout( () => this.props.navigation.navigate("Camera"), 2 * 1000)
   }
 
   render() {
     return (
-      <StyledContainer style={styles.background}>
+      <Container style={styles.background}>
         <Content>
             <ImageBackground source={splashScreenLogo} style={styles.logo}/>
             <Text style={styles.textName}>NOTOW</Text>
             <Text style={styles.textTagLine}>Park safely, anywhere</Text>
         </Content>
-      </StyledContainer>
+      </Container>
 
     );
   }
 }
-
-const StyledContainer = styled(Container) `
-  background: #fafafa;
-`;
 
 export default SplashScreen;
