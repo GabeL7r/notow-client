@@ -20,7 +20,7 @@ class SplashScreen extends Component {
   constructor() {
     super();
 
-    setTimeout( () => this.props.navigation.navigate("Camera"), 4 * 1000);
+    setTimeout( () => this.props.navigation.navigate("Camera"), 3 * 1000);
   }
 
   render() {
