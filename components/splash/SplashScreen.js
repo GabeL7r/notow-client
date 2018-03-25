@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { ImageBackground } from 'react-native';
-import { Container, Header, Content, Button, Text } from 'native-base';
-import styled from 'styled-components';
+import { Container, Content, Text } from 'native-base';
 
 import styles from "./SplashScreenStyles";
 const splashScreenLogo = require("../../assets/noTowCircleBig.png");
