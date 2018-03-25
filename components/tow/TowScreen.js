@@ -19,9 +19,7 @@ class TowScreen extends Component {
             <CardItem style={{ flex:1, flexDirection: 'column', margin: 15 }}>
               <Body style={{ maxWidth: 280 }}>
                 <TowText>Tow!</TowText>
-                <Text>Bummer... You shouldn't park here.</Text>
-                <Text style={{ marginTop: 10, marginBottom: 10 }}>Avoid getting a ticket and look for a different spot.</Text>
-                <Text style={{ marginTop: 20, marginBottom: 25 }}>Don't be like this guy.</Text>
+                <Text style={{ marginTop: 20, marginBottom: 25 }}>Don't be like this guy. Avoid.</Text>
               </Body>
             </CardItem>
             <CardItem style={{ backgroundColor: 'lightgrey', flex:1, flexDirection: 'column' }}>
