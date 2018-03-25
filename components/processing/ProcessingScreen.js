@@ -1,10 +1,32 @@
 import React, { Component } from 'react';
 import { Container, Content, Text, Spinner } from 'native-base';
 import styled from 'styled-components';
+import axios from 'axios';
 
 import AppBackground from '../shared/AppBackground';
 
+const detectEndpoint = 'https://5eqxk53744.execute-api.us-west-2.amazonaws.com/api/detect';
+
 class Processing extends Component {
+  static navigationOptions = {
+    header: null
+  }
+
+  async componentDidMount() {
+    const { params } = this.props.navigation.state;
+    const { pictureData } = params;
+
+    let resp;
+
+    try {
+      resp = await axios.post(detectEndpoint, pictureData);
+      console.log(resp);
+    } catch (e) {
+      // todo notify user
+      console.error('There was an error submitting the picture for processing: ', e);
+    }
+  }
+
   render() {
     return (
       <AppBackground>
