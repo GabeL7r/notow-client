@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import { View, ImageBackground } from 'react-native';
 import { Container, Content, Text, Spinner } from 'native-base';
 import styled from 'styled-components';
 import axios from 'axios';
 
 import AppBackground from '../shared/AppBackground';
+const hotdog = require("../../assets/hotdog.png");
 
 const detectEndpoint = 'https://5eqxk53744.execute-api.us-west-2.amazonaws.com/api/detect-java';
 
@@ -75,7 +77,10 @@ class Processing extends Component {
 
   renderInvalidSign() {
     return (
-      <ProcessingText>This is not a valid parking sign. So yeah, you probably shouldn't park here.</ProcessingText>
+      <React.Fragment>
+        <ProcessingText>Not Hotdog</ProcessingText>
+        <ImageBackground source={ hotdog } style={{ width: '100%', height: 500 }} />
+      </React.Fragment>
     );
   }
 
