@@ -13,6 +13,7 @@ import ProcessingScreen from './components/processing/ProcessingScreen';
 import NoTowScreen from './components/notow/NoTowScreen';
 import TowScreen from './components/tow/TowScreen';
 import DashboardScreen from './components/dashboard/DashboardScreen';
+import LocationsScreen from './components/locations/LocationsScreen';
 
 const RootStack = StackNavigator({
   Splash: {
@@ -32,6 +33,9 @@ const RootStack = StackNavigator({
   },
   Dashboard: {
     screen: DashboardScreen
+  },
+  Locations: {
+    screen: LocationsScreen
   }
 });
 
