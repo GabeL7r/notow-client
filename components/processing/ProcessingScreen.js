@@ -4,6 +4,7 @@ import { Container, Content, Text, Spinner } from 'native-base';
 import styled from 'styled-components';
 import axios from 'axios';
 
+import postLatLng from './postLatLng';
 import AppBackground from '../shared/AppBackground';
 const hotdog = require("../../assets/hotdog.png");
 
@@ -23,13 +24,23 @@ class Processing extends Component {
     const { params } = this.props.navigation.state;
     const { pictureData } = params;
 
-    let resp;
+    let latLngResp;
+    let detectResp;
 
     try {
+      console.log('Posting Lat/Lng coordinates...');
+      latLngResp = await postLatLng(
+        2,
+        pictureData.location.lat,
+        pictureData.location.lng,
+        pictureData.time
+      );
+      console.log('Received data from Hasura: ', latLngResp);
+
       console.log(`Image Char Length: ${pictureData.image.length}`);
       console.log('Processing...');
 
-      resp = await axios(detectEndpoint, {
+      detectResp = await axios(detectEndpoint, {
         method: 'POST',
         headers: {
           'Content-Type' : 'application/json',
@@ -38,9 +49,9 @@ class Processing extends Component {
         data: { image: pictureData.image }
       });
 
-      console.log('Received data: ', resp.data);
+      console.log('Received data from detect api: ', detectResp.data);
 
-      const { data } = resp;
+      const { data } = detectResp;
 
       if (!data) {
         return false;
