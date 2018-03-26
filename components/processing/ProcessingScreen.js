@@ -41,12 +41,13 @@ class Processing extends Component {
       console.log('Processing...');
 
       detectResp = await axios(detectEndpoint, {
+
         method: 'POST',
         headers: {
           'Content-Type' : 'application/json',
           'Cache-Control': 'no-cache'
         },
-        data: { image: pictureData.image }
+        data: { image: pictureData.image, time: pictureData.time  }
       });
 
       console.log('Received data from detect api: ', detectResp.data);
