@@ -41,7 +41,6 @@ class Processing extends Component {
       console.log('Processing...');
 
       detectResp = await axios(detectEndpoint, {
-
         method: 'POST',
         headers: {
           'Content-Type' : 'application/json',
@@ -59,7 +58,7 @@ class Processing extends Component {
       }
 
       // Not hot dog === photo was not a parking sign:
-      if (data.details === 'Not hot dog') {
+      if (data.sign === false) {
         this.setState({ invalidPhoto: true });
         return false;
       }
@@ -90,7 +89,7 @@ class Processing extends Component {
   renderInvalidSign() {
     return (
       <React.Fragment>
-        <ProcessingText>Not Hotdog</ProcessingText>
+        <ProcessingText>This is not a sign. But it might be a hotdog?</ProcessingText>
         <ImageBackground source={ hotdog } style={{ width: '100%', height: 500 }} />
       </React.Fragment>
     );
